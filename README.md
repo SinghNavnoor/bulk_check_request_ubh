@@ -90,7 +90,7 @@ The app expects a CSV exported from HubSpot with columns including:
 |---|---|
 | Client Name | Client X |
 | Payment Date (Today's Date) | 5/20/2020 |
-| Program (Sync) | Housing Program |
+| Program Name Sync | Housing Program |
 | Check Type | Monthly Rent |
 | Type of Assistance | Rent |
 | UBH Amount | 2000 |
@@ -98,7 +98,5 @@ The app expects a CSV exported from HubSpot with columns including:
 | Check Payable to (Sync) | Y LLC |
 | Landlord Address Sync | 1234 New Street, Long Beach, CA |
 | Month (Month the Assistance is being paid for) | July |
-| Payment Month - Calc | June |
-| Payment Year - Calc | 2026 |
 
 Column headers are matched flexibly (case-insensitive, tolerates typos like "Assitance").

@@ -97,6 +97,7 @@ The app expects a CSV exported from HubSpot with columns including:
 | Client Rent Amount | 0 |
 | Check Payable to (Sync) | Y LLC |
 | Landlord Address Sync | 1234 New Street, Long Beach, CA |
+| Month (Month the Assistance is being paid for) | July |
 | Payment Month - Calc | June |
 | Payment Year - Calc | 2026 |
 

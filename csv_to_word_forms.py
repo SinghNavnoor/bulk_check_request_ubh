@@ -47,6 +47,7 @@ FIELD_MAPPING = [
 # Normalized CSV headers for combined "Month/ Year:" (see get_row_values)
 PAYMENT_MONTH_CALC_HEADER = "payment month - calc"
 PAYMENT_YEAR_CALC_HEADER = "payment year - calc"
+MONTH_ASSISTANCE_HEADER = "month (month the assistance is being paid for)"
 
 # Type of Rental Assistance column (HubSpot export typo "Assitance" + correct spelling)
 TYPE_OF_RENTAL_ASSISTANCE_KEYS = (
@@ -148,12 +149,18 @@ def get_row_values(row: dict, column_map: dict[str, str]) -> dict[str, str]:
             val = row.get(orig_col, "")
             result[template_label] = (val or "").strip()
 
-    month_col = column_map.get(PAYMENT_MONTH_CALC_HEADER)
-    year_col = column_map.get(PAYMENT_YEAR_CALC_HEADER)
-    if month_col is not None or year_col is not None:
-        m_val = (row.get(month_col, "") or "").strip() if month_col else ""
-        y_val = (row.get(year_col, "") or "").strip() if year_col else ""
+    assistance_month_col = column_map.get(MONTH_ASSISTANCE_HEADER)
+    if assistance_month_col is not None:
+        m_val = (row.get(assistance_month_col, "") or "").strip()
+        y_val = str(datetime.now().year)
         result["Month/ Year:"] = _format_month_year_line(m_val, y_val)
+    else:
+        month_col = column_map.get(PAYMENT_MONTH_CALC_HEADER)
+        year_col = column_map.get(PAYMENT_YEAR_CALC_HEADER)
+        if month_col is not None or year_col is not None:
+            m_val = (row.get(month_col, "") or "").strip() if month_col else ""
+            y_val = (row.get(year_col, "") or "").strip() if year_col else ""
+            result["Month/ Year:"] = _format_month_year_line(m_val, y_val)
 
     for label in CURRENCY_TEMPLATE_LABELS:
         if label in result:
